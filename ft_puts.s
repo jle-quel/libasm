@@ -8,8 +8,8 @@
 
 section .data
 data:
-	.null db "(null)", 0
-	.eof db 10
+	.null db "(null)", 0x0
+	.eof db 0xa
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; TEXT	
@@ -28,8 +28,7 @@ _ft_puts:
 
 	mov rax, rdi
 	mov r8, rdi
-	
-	mov rcx, 0
+	mov rcx, 0x0
 
 init:
 	cmp r8, 0x0

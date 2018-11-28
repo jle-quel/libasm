@@ -6,7 +6,7 @@
 #    By: jle-quel <jle-quel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 09:40:00 by ysan-seb          #+#    #+#              #
-#    Updated: 2018/11/28 21:27:45 by jle-quel         ###   ########.fr        #
+#    Updated: 2018/11/28 22:35:46 by jle-quel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ CC = gcc
 
 FLAG = -Wall -Werror -Wextra
 
-SRC =	ft_bzero.s	\
-		ft_puts.s	\
+SRC =	ft_bzero.s		\
+		ft_puts.s		\
+		ft_strcat.s		\
+		ft_strncat.s	\
 
 OBJ = $(SRC:.s=.o)
 
