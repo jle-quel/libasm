@@ -26,8 +26,8 @@ _ft_puts:
 	push rbp
 	mov rbp, rsp
 
-	mov rax, rdi
 	mov r8, rdi
+	mov r9, rdi
 	mov rcx, 0x0
 
 init:
@@ -48,6 +48,7 @@ iter:
 	mov rdx, 1
 	mov rax, SYSCALL(WRITE)
 	syscall
+	jc err
 
 	inc r8
 	jmp iter
@@ -58,8 +59,17 @@ end:
 	mov rdx, 1
 	mov rax, SYSCALL(WRITE)
 	syscall
+	jc err
 
-	mov rdi, rax
+	mov rdi, r9
+	mov rax, 10
+
+	leave
+	ret
+
+err:
+	mov rdi, r9
+	mov rax, -1
 
 	leave
 	ret
