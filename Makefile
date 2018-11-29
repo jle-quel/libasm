@@ -6,7 +6,7 @@
 #    By: jle-quel <jle-quel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 09:40:00 by ysan-seb          #+#    #+#              #
-#    Updated: 2018/11/29 15:09:47 by jle-quel         ###   ########.fr        #
+#    Updated: 2018/11/29 15:12:04 by jle-quel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ INC =			$(addprefix $(INC_PATH),$(INC_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar rcs $@ $^
+	@ar rc $@ $^
+	@ranlib $(NAME)
 
 $(OBJ_PATH)%.o:	$(SRC_PATH)%.s
 	@mkdir -p $(OBJ_PATH)
@@ -67,5 +68,5 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: fclean all
+re: fclean
 	@make
