@@ -6,7 +6,7 @@
 /*   By: jle-quel <jle-quel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 17:50:03 by ysan-seb          #+#    #+#             */
-/*   Updated: 2018/11/29 14:44:27 by jle-quel         ###   ########.fr       */
+/*   Updated: 2018/11/29 18:13:58 by jle-quel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int ft_isalnum(int c);
 int ft_isascii(int c);
 int ft_isprint(int c);
 int ft_tolower(int c);
-int ft_tolower(int c);
 int ft_toupper(int c);
+size_t ft_strlen(const char *s);
+void *ft_memset(void *b, int c, size_t len);
 
 #endif
