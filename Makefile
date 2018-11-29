@@ -6,46 +6,66 @@
 #    By: jle-quel <jle-quel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 09:40:00 by ysan-seb          #+#    #+#              #
-#    Updated: 2018/11/29 14:41:24 by jle-quel         ###   ########.fr        #
+#    Updated: 2018/11/29 15:09:47 by jle-quel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libfts.a
+################################################################################
+### INIT 
+################################################################################
 
-CC = gcc
+.PHONY:			all, clean, fclean, re
 
-FLAG = -Wall -Werror -Wextra
+CC			=	nasm
 
-SRC =	ft_bzero.s		\
-		ft_puts.s		\
-		ft_strcat.s		\
-		ft_strncat.s	\
-		ft_isalpha.s	\
-		ft_isdigit.s	\
-		ft_isalnum.s	\
-		ft_isascii.s	\
-		ft_isprint.s	\
-		ft_tolower.s	\
-		ft_toupper.s	\
+CFLAG		=	-f macho64
 
-OBJ = $(SRC:.s=.o)
+NAME		=	libfts.a
+
+SRC_PATH	=	./src/
+
+OBJ_PATH	=	./obj/
+
+INC_PATH	=	./inc/
+
+SRC_NAME	=	ft_bzero.s		\
+				ft_isalnum.s	\
+				ft_isalpha.s	\
+				ft_isascii.s	\
+				ft_isdigit.s	\
+				ft_isprint.s	\
+				ft_puts.s		\
+				ft_strcat.s		\
+				ft_strncat.s	\
+				ft_tolower.s	\
+				ft_toupper.s	\
+
+OBJ_NAME =		$(SRC_NAME:.s=.o)
+
+INC_NAME =		libasm.h
+
+SRC =			$(addprefix $(SRC_PATH),$(SRC_NAME))
+OBJ =			$(addprefix $(OBJ_PATH),$(OBJ_NAME))
+INC =			$(addprefix $(INC_PATH),$(INC_NAME))
+
+################################################################################
+### COMPILATION 
+################################################################################
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	@ar rcs $@ $^
 
-%.o: %.s
-	nasm -g -f macho64 -o $@ $< 
+$(OBJ_PATH)%.o:	$(SRC_PATH)%.s
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAG) -I$(INC_PATH)  $< -o $@
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_PATH)
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -f $(NAME)
 
-re: fclean
-	make
-
-.PHONY: all clean fclean re
+re: fclean all
+	@make
