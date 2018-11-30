@@ -1,31 +1,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXT 
+;;; SECTION TEXT 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section .text
 	global _ft_toupper
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CORE 
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_toupper:
+	push	rbp
+	mov		rbp, rsp
+
 	mov		rax, rdi
 
-comp:
+.comp:
 	cmp		rdi, 0x61
-	jl		end
+	jl		.end
 
 	cmp		rdi, 0x7a
-	jle		upper
+	jle		.upper
 
-	jmp		end
+	jmp		.end
 
-upper:
+.upper:
 	sub		rdi, 32
 	mov		rax, rdi
 
-	jmp		end
+	jmp		.end
 
-end:
+.end:
+	leave
 	ret

@@ -1,32 +1,36 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXT 
+;;; SECTION TEXT 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section .text
 	global _ft_isprint
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CORE 
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_isprint:
+	push	rbp
+	mov		rbp, rsp
+	
 	mov		rax, 0x0
 
-comp:
+.comp:
 	cmp		rdi, 0x20
-	jl		false
+	jl		.false
 
 	cmp		rdi, 0x7e
-	jle		true
+	jle		.true
 
-	jmp		end
+	jmp		.end
 
-false:
+.false:
 	mov		rax, 0x0
-	jmp		end
+	jmp		.end
 
-true:
+.true:
 	mov		rax, 0x1
 
-end:
+.end:
+	leave
 	ret

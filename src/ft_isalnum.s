@@ -1,45 +1,48 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXT 
+;;; SECTION TEXT 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section .text
 	global _ft_isalnum
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CORE 
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_isalnum:
+	push	rbp
+	mov		rbp, rsp
+
 	mov		rax, 0x0
 
-comp:
+.comp:
 	cmp		rdi, 0x30
-	jl		false
+	jl		.false
 
 	cmp		rdi, 0x39
-	jle		true
+	jle		.true
 
 	cmp		rdi, 0x41
-	jl		false
+	jl		.false
 
 	cmp		rdi, 0x5a
-	jle		true
+	jle		.true
 
 	cmp		rdi, 0x61
-	jl		false
+	jl		.false
 
 	cmp		rdi, 0x7a
-	jle		true
+	jle		.true
 
-	jmp		end
+	jmp		.end
 
-false:
+.false:
 	mov		rax, 0x0
-	jmp		end
+	jmp		.end
 
-true:
+.true:
 	mov		rax, 0x1
-	jmp		end
 
-end:
+.end:
+	leave
 	ret

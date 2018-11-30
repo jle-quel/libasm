@@ -1,31 +1,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXT 
+;;; SECTION TEXT 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section .text
 	global _ft_tolower
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CORE 
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_tolower:
+	push	rbp
+	mov		rbp, rsp
+
 	mov		rax, rdi
 
-comp:
+.comp:
 	cmp		rdi, 0x41
-	jl		end
+	jl		.end
 
 	cmp		rdi, 0x5a
-	jle		lower
+	jle		.lower
 
-	jmp		end
+	jmp		.end
 
-lower:
+.lower:
 	add		rdi, 32
 	mov		rax, rdi
 
-	jmp		end
+	jmp		.end
 
-end:
+.end:
+	leave
 	ret

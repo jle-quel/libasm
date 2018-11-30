@@ -1,32 +1,36 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXT	
+;;; SECTION TEXT	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section	.text
 	global _ft_bzero
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CORE	
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_bzero:
+	push	rbp
+	mov		rbp, rsp
+
 	mov		rax, rdi
 	mov		rcx, 0x0
 
 	cmp		rdi, 0x0
-	je		end
+	je		.end
 
-iter:
+.iter:
 	cmp		rsi, rcx
-	je		end
+	je		.end
 
 	mov		byte[rdi], 0x0
 
 	inc		rdi
 	inc		rcx
-	jmp		iter 
+	jmp		.iter 
 
-end:
+.end:
 	mov		rdi, rax
 
+	leave
 	ret

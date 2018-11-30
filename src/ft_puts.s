@@ -3,7 +3,7 @@
 %define SYSCALL(n) 0x2000000 | n
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; DATA 
+;;; SECTION DATA 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section .data
@@ -12,59 +12,64 @@ data:
 	.eof db 0xa
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXT	
+;;; SECTION TEXT	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section	.text
 	global _ft_puts
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CORE	
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_puts:
+	push	rbp
+	mov		rbp, rsp
+
 	mov		r8, rdi
 	mov		r9, rdi
 	mov		rcx, 0x0
 
-init:
+.init:
 	cmp		r8, 0x0
-	je		load
-	jmp		iter
+	je		.load
+	jmp		.iter
 
-load:
+.load:
 	lea		r8, [ rel data.null ]
-	jmp		iter
+	jmp		.iter
 
-iter:
+.iter:
 	cmp		byte[r8], 0x0
-	je		end
+	je		.end
 
 	mov		rdi, STDOUT
 	mov		rsi, r8
 	mov		rdx, 1
 	mov		rax, SYSCALL(WRITE)
 	syscall
-	jc		err
+	jc		.err
 
 	inc		r8
-	jmp		iter
+	jmp		.iter
 
-end:
+.end:
 	mov		rdi, STDOUT
 	lea		rsi, [ rel data.eof ]
 	mov		rdx, 1
 	mov		rax, SYSCALL(WRITE)
 	syscall
-	jc		err
+	jc		.err
 
 	mov		rdi, r9
 	mov		rax, 10
 
+	leave
 	ret
 
-err:
+.err:
 	mov		rdi, r9
 	mov		rax, -1
 
+	leave
 	ret
