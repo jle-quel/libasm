@@ -6,7 +6,7 @@
 /*   By: jle-quel <jle-quel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 17:50:03 by ysan-seb          #+#    #+#             */
-/*   Updated: 2018/11/29 18:13:58 by jle-quel         ###   ########.fr       */
+/*   Updated: 2018/11/30 13:13:02 by jle-quel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int ft_tolower(int c);
 int ft_toupper(int c);
 size_t ft_strlen(const char *s);
 void *ft_memset(void *b, int c, size_t len);
+void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
 #endif

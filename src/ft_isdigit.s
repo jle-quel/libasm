@@ -10,28 +10,23 @@ section .text
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_isdigit:
-	push rbp
-	mov rbp, rsp
-
-	mov rax, 0x0
+	mov		rax, 0x0
 
 comp:
-	cmp rdi, 0x30
-	jl false
+	cmp		rdi, 0x30
+	jl		false
 
-	cmp rdi, 0x39
-	jle true
+	cmp		rdi, 0x39
+	jle		true
 
-	jmp end
+	jmp		end
 
 false:
-	mov rax, 0x0
-	jmp end
+	mov		rax, 0x0
+	jmp		end
 
 true:
-	mov rax, 0x1
-	jmp end
+	mov		rax, 0x1
 
 end:
-	leave
 	ret

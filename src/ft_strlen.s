@@ -10,28 +10,24 @@ section	.text
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_strlen:
-	push rbp
-	mov rbp, rsp
+	mov		rcx, -1
+	mov		r8, rdi
 
-	mov rcx, -1
-	mov r8, rdi
-
-	cmp rdi, 0x0
-	je err
+	cmp		rdi, 0x0
+	je		err
 
 iter:
-	mov rax, 0x0
-	repne scasb
+	mov		rax, 0x0
+	repne	scasb
 
-	sub rdi, r8
-	sub rdi, 1
-	mov rax, rdi
+	sub		rdi, r8
+	sub		rdi, 1
+	mov		rax, rdi
 
-	jmp end
+	jmp		end
 
 err:
-	mov rax, 0
+	mov		rax, 0
 
 end:
-	leave
 	ret

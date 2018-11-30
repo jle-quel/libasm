@@ -23,53 +23,48 @@ section	.text
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_puts:
-	push rbp
-	mov rbp, rsp
-
-	mov r8, rdi
-	mov r9, rdi
-	mov rcx, 0x0
+	mov		r8, rdi
+	mov		r9, rdi
+	mov		rcx, 0x0
 
 init:
-	cmp r8, 0x0
-	je load
-	jmp iter
+	cmp		r8, 0x0
+	je		load
+	jmp		iter
 
 load:
-	lea r8, [ rel data.null ]
-	jmp iter
+	lea		r8, [ rel data.null ]
+	jmp		iter
 
 iter:
-	cmp byte[r8], 0x0
-	je end
+	cmp		byte[r8], 0x0
+	je		end
 
-	mov rdi, STDOUT
-	mov rsi, r8
-	mov rdx, 1
-	mov rax, SYSCALL(WRITE)
+	mov		rdi, STDOUT
+	mov		rsi, r8
+	mov		rdx, 1
+	mov		rax, SYSCALL(WRITE)
 	syscall
-	jc err
+	jc		err
 
-	inc r8
-	jmp iter
+	inc		r8
+	jmp		iter
 
 end:
-	mov rdi, STDOUT
-	lea rsi, [ rel data.eof ]
-	mov rdx, 1
-	mov rax, SYSCALL(WRITE)
+	mov		rdi, STDOUT
+	lea		rsi, [ rel data.eof ]
+	mov		rdx, 1
+	mov		rax, SYSCALL(WRITE)
 	syscall
-	jc err
+	jc		err
 
-	mov rdi, r9
-	mov rax, 10
+	mov		rdi, r9
+	mov		rax, 10
 
-	leave
 	ret
 
 err:
-	mov rdi, r9
-	mov rax, -1
+	mov		rdi, r9
+	mov		rax, -1
 
-	leave
 	ret

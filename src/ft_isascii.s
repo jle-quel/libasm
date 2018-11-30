@@ -10,28 +10,24 @@ section .text
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_isascii:
-	push rbp
-	mov rbp, rsp
-
-	mov rax, 0x0
+	mov		rax, 0x0
 
 comp:
-	cmp rdi, 0x0
-	jl false
+	cmp		rdi, 0x0
+	jl		false
 
-	cmp rdi, 0x7f
-	jle true
+	cmp		rdi, 0x7f
+	jle		true
 
-	jmp end
+	jmp		end
 
 false:
-	mov rax, 0x0
-	jmp end
+	mov		rax, 0x0
+	jmp		end
 
 true:
-	mov rax, 0x1
-	jmp end
+	mov		rax, 0x1
+	jmp		end
 
 end:
-	leave
 	ret

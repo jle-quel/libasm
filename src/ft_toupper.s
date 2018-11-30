@@ -10,26 +10,22 @@ section .text
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 _ft_toupper:
-	push rbp
-	mov rbp, rsp
-
-	mov rax, rdi
+	mov		rax, rdi
 
 comp:
-	cmp rdi, 0x61
-	jl end
+	cmp		rdi, 0x61
+	jl		end
 
-	cmp rdi, 0x7a
-	jle upper
+	cmp		rdi, 0x7a
+	jle		upper
 
-	jmp end
+	jmp		end
 
 upper:
-	sub rdi, 32
-	mov rax, rdi
+	sub		rdi, 32
+	mov		rax, rdi
 
-	jmp end
+	jmp		end
 
 end:
-	leave
 	ret
