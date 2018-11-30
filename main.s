@@ -3,9 +3,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section .data
-hello:
-	.hello	db "Hello", 10, 0
-	.babye	db "Babye", 10, 0
+title:
+	.ft_strdup	db "ft_strdup: ", 0
+log:
+	.ok			db "OK", 10, 0
+	.err		db "ERR", 10, 0
+string:
+	.simple		db "hello", 10, 0
+	.empty		db "", 10, 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; TEXT	
@@ -15,37 +20,16 @@ section	.text
 	global start
 	global _main
 	global _strdup_test
+	global _check
 
 	extern _strdup
 	extern _ft_strdup
 	extern _printf
 	extern _free
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; STRDUP 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-_strdup_test:
-	push	rbp
-	mov		rbp, rsp
-
-.L1:
-	; lea		rdi, [ rel hello.hello ]
-	; call	_ft_strdup
-	; mov		r12, rax
-
-	; mov		rdi, rax
-	; call	_printf
-
-	; mov		rdi, r12
-	; call	_free
-
-	leave
-	ret
+	extern _strcmp
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; MAIN
+;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 start:
@@ -55,7 +39,7 @@ _main:
 	push	rbp
 	mov		rbp, rsp
 
-	call	_strdup_test
+	; call	_ft_strdup_test
 
 .end:
 	mov		rax, 0x0
