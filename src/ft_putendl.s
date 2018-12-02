@@ -1,36 +1,44 @@
+%define STDERR 2
+%define WRITE 4
+%define SYSCALL(n) 0x2000000 | n
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; SECTION TEXT	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 section	.text
-	global _ft_strlen
+	global _ft_putendl
+
+	extern _ft_putchar
+	extern _ft_strlen
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-_ft_strlen:
+_ft_putendl:
 	push	rbp
 	mov		rbp, rsp
 
-	cmp		rdi, 0x0
-	je		.err
+backup:
+	mov		r12, rdi
+	mov		r13, rsi
 
-	mov		rcx, -1
-	mov		r8, rdi
+write:
+	call	_ft_strlen
 
-.iter:
-	mov		rax, 0x0
-	repne	scasb
+	mov		rdi, r13
+	mov		rsi, r12 
+	mov		rdx, rax
 
-	sub		rdi, r8
-	sub		rdi, 1
-	mov		rax, rdi
+	mov		rax, SYSCALL(WRITE)
+	syscall
+	jc		.end
 
-	jmp		.end
-
-.err:
-	mov		rax, 0
+.newline:
+	mov		rdi, 0xa
+	mov		rsi, r13
+	call	_ft_putchar
 
 .end:
 	leave

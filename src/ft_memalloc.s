@@ -2,36 +2,50 @@
 ;;; SECTION TEXT	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-section	.text
-	global _ft_strlen
+section .text
+	global _ft_memalloc
+
+	extern _ft_bzero
+	extern _malloc
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-_ft_strlen:
+_ft_memalloc:
 	push	rbp
 	mov		rbp, rsp
 
+.check:
 	cmp		rdi, 0x0
 	je		.err
 
-	mov		rcx, -1
-	mov		r8, rdi
+.backup:
+	mov		r12, rdi
 
-.iter:
-	mov		rax, 0x0
-	repne	scasb
+.malloc:
+	call	_malloc
+	
+	cmp		rax, 0x0
+	je		.err
 
-	sub		rdi, r8
-	sub		rdi, 1
-	mov		rax, rdi
+	mov		r13, rax
+
+.bzero:
+	mov		rdi, r13
+	mov		rsi, r12
+	call	_ft_bzero
 
 	jmp		.end
 
 .err:
-	mov		rax, 0
+	mov		rax, 0x0
+
+	leave
+	ret
 
 .end:
+	mov		rax, r13
+
 	leave
 	ret

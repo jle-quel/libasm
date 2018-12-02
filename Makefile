@@ -6,7 +6,7 @@
 #    By: jle-quel <jle-quel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 09:40:00 by ysan-seb          #+#    #+#              #
-#    Updated: 2018/11/30 16:37:49 by jle-quel         ###   ########.fr        #
+#    Updated: 2018/12/02 15:56:59 by jle-quel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,11 @@ SRC_NAME	=	ft_bzero.s		\
 				ft_memcpy.s		\
 				ft_memset.s		\
 				ft_strdup.s		\
+				ft_cat.s		\
+				ft_memalloc.s	\
+				ft_strchr.s		\
+				ft_putchar.s	\
+				ft_putendl.s	\
 
 OBJ_NAME =		$(SRC_NAME:.s=.o)
 

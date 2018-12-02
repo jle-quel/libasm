@@ -1,37 +1,49 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; SECTION TEXT	
+;;; SECTION TEXT 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-section	.text
-	global _ft_strlen
+section .text
+	global _ft_strchr
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; PUBLIC FUNCTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-_ft_strlen:
+; char *ft_strchr(const char *s, int c);
+
+_ft_strchr:
 	push	rbp
 	mov		rbp, rsp
 
 	cmp		rdi, 0x0
-	je		.err
-
-	mov		rcx, -1
-	mov		r8, rdi
+	je		.end
 
 .iter:
-	mov		rax, 0x0
-	repne	scasb
+	cmp		byte[rdi], 0x0
+	je		.check
 
-	sub		rdi, r8
-	sub		rdi, 1
-	mov		rax, rdi
+	mov		rax, rsi
+	cmp		byte[rdi], al 
+	je		.end
+
+	inc		rdi
+
+	jmp		.iter
+
+.check:
+	cmp		rsi, 0x0
+	jne		.null
 
 	jmp		.end
 
-.err:
-	mov		rax, 0
+.null:
+	mov		rax, 0x0
+
+	leave
+	ret
 
 .end:
+	mov		rax, rdi
+
 	leave
 	ret
