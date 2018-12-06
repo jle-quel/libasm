@@ -18,20 +18,23 @@ _ft_strdup:
 	mov		rbp, rsp
 
 .backup:
+	push	r12
 	mov		r12, rdi
 
 .check:
 	cmp		rdi, 0x0
-	je		.err
+	je		.null
 
 .strlen:
 	call	_ft_strlen
+	push	r13
 	mov		r13, rax
 
 .malloc:
 	mov		rdi, r13
 	add		rdi, 1
 	call	_malloc
+	push	r14
 	mov		r14, rax
 
 	cmp		rax, 0x0
@@ -48,6 +51,13 @@ _ft_strdup:
 
 	jmp		.end
 
+.null:
+	pop		r12
+	mov		rax, 0x0
+
+	leave
+	ret
+
 .err:
 	mov		rax, 0x0
 
@@ -56,6 +66,10 @@ _ft_strdup:
 
 .end:
 	mov		rax, r14
+
+	pop		r14
+	pop		r13
+	pop		r12
 
 	leave
 	ret

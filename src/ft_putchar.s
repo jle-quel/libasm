@@ -16,6 +16,7 @@ _ft_putchar:
 	mov		rbp, rsp
 
 .backup:
+	push	r12
 	mov		r12, rsi
 
 .init:
@@ -34,5 +35,7 @@ _ft_putchar:
 	add		rsp, 8
 
 .end:
+	pop		r12
+
 	leave
 	ret

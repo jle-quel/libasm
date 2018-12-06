@@ -21,6 +21,9 @@ _ft_putendl:
 	mov		rbp, rsp
 
 backup:
+	push	r12
+	push	r13
+
 	mov		r12, rdi
 	mov		r13, rsi
 
@@ -41,5 +44,8 @@ write:
 	call	_ft_putchar
 
 .end:
+	pop		r13
+	pop		r12
+
 	leave
 	ret

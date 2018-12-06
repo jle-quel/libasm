@@ -21,6 +21,7 @@ _ft_memalloc:
 	je		.err
 
 .backup:
+	push	r12
 	mov		r12, rdi
 
 .malloc:
@@ -29,6 +30,7 @@ _ft_memalloc:
 	cmp		rax, 0x0
 	je		.err
 
+	push	r13
 	mov		r13, rax
 
 .bzero:
@@ -41,11 +43,16 @@ _ft_memalloc:
 .err:
 	mov		rax, 0x0
 
+	pop		r12
+
 	leave
 	ret
 
 .end:
 	mov		rax, r13
+
+	pop		r13
+	pop		r12
 
 	leave
 	ret

@@ -29,6 +29,7 @@ _ft_cat:
 	push	rbp
 	mov		rbp, rsp
 
+	push	r12
 	mov		r12, rdi
 
 .init:
@@ -62,5 +63,7 @@ _ft_cat:
 	mov		rax, -1
 
 .end:
+	pop		r12
+
 	leave
 	ret
